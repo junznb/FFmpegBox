@@ -1,0 +1,134 @@
+/* style-light.css —— 浅蓝白配 */
+
+/* —— 全局背景 & 字体 —— */
+.root {
+    -fx-background-color: #FFFFFF;                  /* 纯白 */
+    -fx-font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+    -fx-text-fill: #212121;                        /* 深灰字 */
+}
+
+/* —— MFXButton —— */
+.mfx-button {
+    -fx-background-color: #90CAF9;                 /* 浅天蓝 */
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 6 16;
+}
+.mfx-button:hover {
+    -fx-background-color: derive(#90CAF9, -10%);   /* 微微深一点 */
+}
+
+/* —— MFXTextField & MFXFilterComboBox —— */
+.mfx-text-field,
+.mfx-filter-combo-box {
+    -fx-background-color: #F5F9FF;                 /* 极浅蓝灰 */
+    -fx-background-radius: 4;
+    -fx-padding: 8 12;
+    -fx-border-color: transparent;
+}
+.mfx-text-field:focused,
+.mfx-filter-combo-box:focused {
+    -fx-border-color: #90CAF9;                     /* 浅天蓝边 */
+    -fx-border-width: 2;
+}
+
+/* 浮动标签颜色 */
+.mfx-text-field .floating-text,
+.mfx-filter-combo-box .floating-text {
+    -fx-fill: #90CAF9;
+}
+
+/* 下拉箭头 & 选中行背景 */
+.mfx-filter-combo-box .list-view .list-cell:selected {
+    -fx-background-color: #E3F2FD;                 /* 轻盈高亮 */
+}
+
+/* —— 原生 ListView —— */
+.list-view {
+    -fx-background-color: #FAFCFF;                 /* 极浅蓝 */
+    -fx-border-color: #BBDEFB;                     /* 浅蓝虚线 */
+    -fx-border-style: dashed;
+    -fx-border-width: 2;
+}
+.list-view .list-cell {
+    -fx-padding: 4 8;
+}
+.list-view .list-cell:selected {
+    -fx-background-color: #84bff3;
+}
+
+/* —— 进度条 —— */
+.list-view .mfx-progress-bar,
+.list-view .progress-bar {
+    -fx-pref-width: 600px;      /* 你要的固定长度 */
+    -fx-max-width: 600px;
+    -fx-background-radius: 4;
+    -fx-padding: 2;
+}
+.list-view .mfx-progress-bar .bar,
+.list-view .progress-bar .bar {
+    -fx-background-color: #90CAF9;                 /* 天蓝进度 */
+    -fx-background-radius: 4;
+}
+
+/* —— TabPane —— */
+.tab-pane {
+    -fx-tab-min-height: 32;
+    -fx-tab-max-height: 32;
+}
+.tab-pane .tab-header-area .tab:selected {
+    -fx-background-color: #90CAF9;
+    -fx-text-base-color: white;
+}
+.tab-pane .tab-header-area .tab:hover {
+    -fx-background-color: derive(#90CAF9, -10%);
+}
+.tab-pane .tab-header-area .tab {
+    -fx-background-color: transparent;
+    -fx-text-base-color: #212121;
+    -fx-padding: 8 16;
+    -fx-background-radius: 4 4 0 0;
+}
+
+/* —— TextArea —— */
+.text-area {
+    -fx-control-inner-background: #FAFCFF;
+    -fx-border-color: #E0E0E0;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+/* —— MFXFilterComboBox 下拉提示框 —— */
+.mfx-filter-combo-box .popup-content {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #BBDEFB;
+}
+
+/* —— Tooltip —— */
+.tooltip {
+    -fx-background-color: #90CAF9;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+}
+
+/* —— TabPane 头部背景—— */
+.tab-pane > .tab-header-area {
+    -fx-background-color: #346de5;   /* 极浅蓝灰 */
+}
+
+/* 去掉每个 Tab 的默认边框 */
+.tab-pane > .tab-header-area .tab {
+    -fx-border-color: transparent;
+}
+
+/* 被选中 Tab 的高亮 */
+.tab-pane > .tab-header-area .tab:selected {
+    -fx-background-color: #2290f3;   /* 轻盈高亮 */
+}
+
+/* 整个页签头下的横线也同样设为透明 */
+.tab-pane > .tab-header-area .tab-header-background,
+.tab-pane > .tab-header-area .headers-region {
+    -fx-background-color: #F5F9FF;
+    -fx-border-color: transparent;
+}

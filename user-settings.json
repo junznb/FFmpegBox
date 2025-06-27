@@ -1,0 +1,7 @@
+{
+  "ffmpegPath" : "F:\\ffmpeg\\ffmpeg\\bin\\ffmpeg.exe",
+  "resolution" : "1920x1080",
+  "bitrate" : "800k",
+  "format" : "avi",
+  "lastOutputDir" : "F:\\My_project\\FFmpegBox\\output"
+}
