@@ -25,33 +25,6 @@ public class FFmpegController {
         this.updateProgressCallback = callback;
     }
 
-    public void convertVideo(String inputPath, String outputPath, String format,
-                             String resolution, String bitrate, String ffmpegPath) {
-
-        CommandBuilder builder = new CommandBuilder()
-                .setFfmpegPath(ffmpegPath)
-                .setInputPath(inputPath)
-                .setOutputPath(outputPath)
-                .setFormat(format)
-                .setResolution(resolution)
-                .setBitrate(bitrate);
-
-        List<String> command = builder.build();
-
-        log("生成命令：");
-        log(String.join(" ", command));
-
-        try {
-            ProcessBuilder builder_pb = new ProcessBuilder(command);
-            builder_pb.redirectErrorStream(true);
-            Process process = builder_pb.start();
-
-            new Thread(() -> readProcessOutput(process.getInputStream())).start();
-
-        } catch (IOException e) {
-            log("执行失败：" + e.getMessage());
-        }
-    }
 
     private void readProcessOutput(InputStream inputStream) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
@@ -93,6 +66,22 @@ public class FFmpegController {
             }
         }
 
+    }
+
+    public void runCommand(List<String> command) {
+        log("生成命令：");
+        log(String.join(" ", command));
+        try {
+            ProcessBuilder pb = new ProcessBuilder(command);
+            pb.redirectErrorStream(true);
+            Process process = pb.start();
+
+            // 复用已有的输出读取线程
+//            new Thread(() -> readProcessOutput(process.getInputStream())).start();
+            readProcessOutput(process.getInputStream());
+        } catch (IOException e) {
+            log("执行失败：" + e.getMessage());
+        }
     }
 
     private void log(String message) {

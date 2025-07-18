@@ -2,7 +2,9 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXSlider?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -19,7 +21,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="800" prefWidth="1200" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ffmpegbox.controller.MainController">
+<AnchorPane fx:id="rootPane" prefHeight="800" prefWidth="1200" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ffmpegbox.controller.MainController">
 
     <TabPane fx:id="tabPane" layoutY="367.0" prefHeight="233.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="367.0">
         <tabs>
@@ -67,20 +69,56 @@
             </Tab>
          <Tab text="视频">
            <content>
-             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <MFXTextField fx:id="resolutionField" floatingText="分辨率" layoutX="961.0" layoutY="34.0" />
+                     <MFXTextField fx:id="bitrateField" floatingText="视频码率" layoutX="1060.0" layoutY="34.0" />
+                     <MFXFilterComboBox fx:id="videoCodecBox" floatingText="选择编码器" layoutX="74.0" layoutY="34.0" />
+                     <MFXFilterComboBox fx:id="videoBitrateBox" floatingText="视频码率" layoutX="212.0" layoutY="34.0" />
+                     <AnchorPane layoutX="74.0" layoutY="104.0">
+                        <children>
+                           <MFXSlider fx:id="crfSlider" layoutX="15.0" layoutY="21.0" max="51.0" prefHeight="0.0" prefWidth="267.0" />
+                           <MFXTextField fx:id="crfTextField" floatingText="CRF" layoutX="291.0" />
+                        </children>
+                     </AnchorPane>
+                     <MFXToggleButton fx:id="useCrfToggle" layoutX="363.0" layoutY="34.0" text="启用CRF" />
+                     <AnchorPane layoutX="73.0" layoutY="153.0">
+                        <children>
+                           <MFXToggleButton fx:id="avSeparationToggle" layoutX="1.0" text="音视频分离" />
+                           <MFXFilterComboBox fx:id="saveModeBox" floatingText="保存文件选择" layoutX="148.0" layoutY="1.0" />
+                        </children>
+                     </AnchorPane>
+                     <AnchorPane layoutX="73.0" layoutY="210.0">
+                        <children>
+                           <MFXToggleButton fx:id="clipToggle" layoutX="1.0" layoutY="4.0" text="视频剪辑" />
+                           <MFXTextField fx:id="startTimeField" floatingText="起始时间" layoutX="140.0" layoutY="1.0" />
+                           <MFXTextField fx:id="endTimeField" floatingText="结束时间" layoutX="283.0" />
+                        </children>
+                     </AnchorPane>
+                  </children></AnchorPane>
            </content>
          </Tab>
          <Tab text="音频">
            <content>
-             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <MFXFilterComboBox fx:id="audioCodecBox" floatingText="选择编码器" layoutX="50.0" layoutY="38.0" prefHeight="46.0" prefWidth="118.0" />
+                     <MFXFilterComboBox fx:id="audioBitrateBox" floatingText="音频码率" layoutX="197.0" layoutY="38.0" prefHeight="47.0" prefWidth="118.0" />
+                  </children></AnchorPane>
            </content>
          </Tab>
          <Tab text="设置">
            <content>
              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                     <MFXTextField fx:id="ffmpegPathField" floatingText="FFmpeg路径" layoutX="118.0" layoutY="83.0" prefHeight="49.0" prefWidth="226.0" />
-                     <MFXButton layoutX="356.0" layoutY="87.0" onAction="#handleChooseFFmpeg" prefHeight="41.0" prefWidth="74.0" text="选择" />
+                     <AnchorPane layoutX="20.0" layoutY="20.0">
+                        <children>
+                           <MFXTextField fx:id="ffmpegPathField" allowEdit="false" floatingText="FFmpeg路径" prefHeight="49.0" prefWidth="226.0" />
+                           <MFXButton layoutX="238.0" layoutY="4.0" onAction="#handleChooseFFmpeg" prefHeight="41.0" prefWidth="74.0" text="选择" />
+                           <MFXTextField fx:id="ffmpegVersionField" allowEdit="false" floatingText="版本号" layoutY="56.0" prefHeight="49.0" prefWidth="226.0" />
+                        </children>
+                     </AnchorPane>
+                     <MFXTextField fx:id="maxThreadsField" floatingText="最大并发数" layoutX="540.0" layoutY="20.0" prefHeight="49.0" prefWidth="128.0" />
                   </children></AnchorPane>
            </content>
          </Tab>
@@ -89,11 +127,22 @@
              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
 
-                      <MFXFilterComboBox fx:id="formatBox_MFX_file" floatingText="输出格式" layoutX="633.0" layoutY="166.0" prefHeight="25.0" prefWidth="165.0" />
-                     <MFXTextField fx:id="outputDirField" floatingText="输出目录" layoutX="633.0" layoutY="98.0" prefHeight="49.0" prefWidth="299.0" />
-                     <MFXButton layoutX="943.0" layoutY="102.0" onAction="#handleChooseOutputDir" prefHeight="41.0" prefWidth="74.0" text="选择" />
-                     <MFXTextField fx:id="resolutionField" floatingText="分辨率" layoutX="187.0" layoutY="98.0" />
-                     <MFXTextField fx:id="bitrateField" floatingText="码率" layoutX="187.0" layoutY="161.0" />
+                      <MFXFilterComboBox fx:id="formatBox_MFX_file" floatingText="输出格式" layoutX="788.0" layoutY="29.0" prefHeight="25.0" prefWidth="165.0" />
+                     <AnchorPane layoutX="14.0" layoutY="24.0">
+                        <children>
+                           <MFXTextField fx:id="outputDirField" floatingText="输出目录" prefHeight="49.0" prefWidth="299.0" />
+                           <MFXButton layoutX="310.0" layoutY="4.0" onAction="#handleChooseOutputDir" prefHeight="41.0" prefWidth="74.0" text="选择" />
+                        </children>
+                     </AnchorPane>
+                     <AnchorPane layoutX="13.0" layoutY="89.0">
+                        <children>
+                           <MFXToggleButton fx:id="textWatermarkToggle" layoutX="1.0" layoutY="4.0" text="添加文字水印" />
+                           <MFXTextField fx:id="textWatermarkSize" floatingText="字号" layoutX="113.0" />
+                           <MFXTextField fx:id="textWatermarkContent" floatingText="内容" layoutX="201.0" prefHeight="49.0" prefWidth="186.0" />
+                           <MFXFilterComboBox fx:id="textWatermarkPosition" floatingText="位置" layoutX="113.0" layoutY="60.0" />
+                        </children>
+                     </AnchorPane>
+                     <MFXFilterComboBox floatingText="选择硬件加速" layoutX="976.0" layoutY="29.0" prefHeight="40.0" prefWidth="151.0" />
                   </children>
                </AnchorPane>
            </content>
@@ -112,10 +161,8 @@
     </TabPane>
 
     <ListView fx:id="fileListView" layoutX="23.0" layoutY="19.0" prefHeight="280.0" prefWidth="1139.0" style="-fx-background-color: #f4faff; -fx-border-color: #7abaff; -fx-border-style: dashed;" AnchorPane.bottomAnchor="487.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="33.0" />
-<!--         <Button layoutX="1086.0" layoutY="331.0" onAction="#handleConvert" text="开始转换" />-->
-<!--            <Button fx:id="deleteButton" layoutX="970.0" layoutY="331.0" onAction="#handleDeleteSelected" text="删除选中" />-->
            <MFXButton layoutX="785.0" layoutY="330.0" onAction="#handleDeleteSelected" text="删除选中" />
-           <MFXButton layoutX="874.0" layoutY="330.0" onAction="#handleConvert" text="开始转换" />
+           <MFXButton fx:id="handleButton" layoutX="874.0" layoutY="330.0" onAction="#handleConvert" text="开始转换" />
 
 
 

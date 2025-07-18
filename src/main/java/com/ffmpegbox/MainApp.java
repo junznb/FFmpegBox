@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import com.ffmpegbox.controller.MainController;
+
 
 public class MainApp extends Application {
 
@@ -26,6 +28,13 @@ public class MainApp extends Application {
     }
 
     @Override
+    public void stop() {
+        if (MainController.executor != null && !MainController.executor.isShutdown()) {
+            MainController.executor.shutdown();
+        }
+    }
+
+    @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainView.fxml"));
         AnchorPane root = loader.load();
@@ -40,4 +49,6 @@ public class MainApp extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
     }
+
+
 }

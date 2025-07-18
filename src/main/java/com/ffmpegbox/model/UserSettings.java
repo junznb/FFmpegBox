@@ -5,9 +5,17 @@ public class UserSettings {
     private String resolution;
     private String bitrate;
     private String format;
-//    private String lastInput;
     private String lastOutputDir;
+    private String videoCodec;  // 添加视频编码器字段
+    private int maxThreads = 3; // 默认值
 
+    public int getMaxThreads() {
+        return maxThreads;
+    }
+
+    public void setMaxThreads(int maxThreads) {
+        this.maxThreads = maxThreads;
+    }
     // Getter 和 Setter
     public String getFfmpegPath() {
         return ffmpegPath;
@@ -41,19 +49,19 @@ public class UserSettings {
         this.format = format;
     }
 
-//    public String getLastInput() {
-//        return lastInput;
-//    }
-//
-//    public void setLastInput(String lastInput) {
-//        this.lastInput = lastInput;
-//    }
-
     public String getLastOutputDir() {
         return lastOutputDir;
     }
 
     public void setLastOutputDir(String lastOutputDir) {
         this.lastOutputDir = lastOutputDir;
+    }
+
+    public String getVideoCodec() {
+        return videoCodec;
+    }
+
+    public void setVideoCodec(String videoCodec) {
+        this.videoCodec = videoCodec;
     }
 }
